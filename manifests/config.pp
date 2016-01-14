@@ -49,8 +49,19 @@ class mailman::config inherits mailman::params {
   $mm_username              = $mailman::params::mm_username
   $mm_groupname             = $mailman::params::mm_groupname
 
+  if $::osfamily == 'Debian' {
+    $mm_cfg_path = '/etc/mailman/mm_cfg.py'
+    file { "${prefix}/Mailman/mm_cfg.py":
+        ensure => link,
+        target => $mm_cfg_path,
+        require => File[$mm_cfg_path],
+    }
+  }
+  else {
+    $mm_cfg_path = "${prefix}/Mailman/mm_cfg.py"
+  }
   file { 'mm_cfg':
-    path    => "${prefix}/Mailman/mm_cfg.py",
+    path    => $mm_cfg_path,
     content => template("${module_name}/mm_cfg.py.erb"),
     owner   => 'root',
     group   => $mm_groupname,
