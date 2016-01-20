@@ -104,7 +104,11 @@ true  = True
 VAR_PREFIX    = '<%= @var_prefix %>'
 
 LANGUAGE      = '<%= @language %>'
+<% if @mta == 'None' -%>
+MTA           = None
+<% else -%>
 MTA           = '<%= @mta %>'
+<% end %>
 
 LOG_DIR       = '<%= @log_dir %>'
 LOCK_DIR      = '<%= @lock_dir %>'

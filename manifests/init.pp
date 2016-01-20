@@ -38,7 +38,10 @@
 #
 # [*mta*]
 #   A Mailman MTA module contains code to add and remove entries from aliases
-#   files. Using Postfix with Mailman is the most typical choice.
+#   files. Using Postfix with Mailman is the most typical choice. Defaults
+#   to 'Manual'. The mailman software also allows you to set the variable to
+#   None. (Just specify the string 'None', this module makes sure to write
+#   the python syntax None, without any quotes).
 #
 # [*smtp_hostname*]
 #   In Mailman parlance, this variable is known as "default_email_host".
@@ -112,7 +115,7 @@ class mailman (
     'ru','sk','sl','sr','sv','tr','uk','vi','zh_CN','zh_TW']
   validate_bool($enable_service)
   validate_re($language, $langs)
-  validate_re($mta, ['Manual', 'Postfix'])
+  validate_re($mta, ['Manual', 'Postfix', 'None'])
   validate_re($smtp_hostname, '^[-a-zA-Z0-9]+\.[-a-zA-Z0-9\.]+$')
   validate_re($http_hostname, '^[-a-zA-Z0-9\.]+$')
   validate_bool($virtual_host_overview)
