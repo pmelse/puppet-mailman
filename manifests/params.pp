@@ -87,7 +87,7 @@ class mailman::params {
       # archive_dir is not a real Mailman param, it's just useful in this module
       $archive_dir   = "${var_prefix}/archives"
       $queue_dir     = '/var/spool/mailman'
-
+      notify { $cgi_dir: }
       # Other useful files
       $pid_file      = "${pid_dir}/master-qrunner.pid"
     }
