@@ -35,7 +35,7 @@ class mailman::apache {
   $error_log          = "${log_dir}/${error_log_name}"
   $favicon            = "${document_root}/favicon.ico"
 
-  if versioncmp($::apacheversion, '2.4.0') >= 0 {
+  if versioncmp($::apache::version, '2.4.0') >= 0 {
     fail('Apache 2.4 is not supported by this Puppet module.')
   }
 
