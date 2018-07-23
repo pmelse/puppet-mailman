@@ -71,7 +71,7 @@ class mailman::params {
       $prefix        = '/usr/lib/mailman'
       $exec_prefix   = $prefix
       $var_prefix    = '/var/lib/mailman'
-
+      $cgi_path      = '/usr/lib/cgi-bin/mailman' # unique to debian, tested on stretch
       $list_data_dir = "${var_prefix}/lists"
       $log_dir       = '/var/log/mailman'
       $lock_dir      = '/var/lock/mailman'
