@@ -59,7 +59,7 @@ class mailman::apache {
   $httpd_service      = $::apache::params::apache_name
 
   include apache::mod::alias
-  notify { $mailman_ssl: }
+  notify { bool2str($mailman_ssl): }
     notify { $mailman_ssl_cert: }
       notify { $mailman_ssl_key: }
         notify { $mailman_ssl_ca: }
