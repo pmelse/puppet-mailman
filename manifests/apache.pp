@@ -28,7 +28,7 @@ class mailman::apache {
   $server_name        = $mailman::http_hostname
   $document_root      = '/var/www/html/mailman'
   $mailman_cgi_dir    = $mailman::params::cgi_dir
-  $mailman_icons_dir  = "${prefix}/icons"
+  $mailman_icons_dir  = $mailman::params::icons_dir
   $custom_log_name    = 'apache_access_log'
   $error_log_name     = 'apache_error_log'
   $custom_log         = "${log_dir}/${custom_log_name}"
