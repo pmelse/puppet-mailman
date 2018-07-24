@@ -59,7 +59,7 @@ class mailman::apache {
   $cf1 = "ScriptAlias /mailman ${mailman_cgi_dir}/"
   $cf2 = "RedirectMatch ^/mailman[/]*$ http://${server_name}/mailman/listinfo"
   $cf3 = "RedirectMatch ^/?$ http://${server_name}/mailman/listinfo"
-  $cf4 = "ScriptAlias /doc/mailman/images /usr/share/images/mailman/"
+  $cf4 = "ScriptAlias /doc/mailman/images ${mailman_icons_dir}"
   $cf_all = "${cf1}\n${cf2}\n${cf3}\n${cf4}\n"
 
   apache::vhost { $server_name:
@@ -81,6 +81,12 @@ class mailman::apache {
         path            => $mailman_cgi_dir,
         allow_override  => ['None'],
         options         => ['ExecCGI'],
+        order           => 'Allow,Deny',
+        allow           => 'from all'
+      },
+      {
+        path            => $mailman_icons_dir,
+        allow_override  => ['None'],
         order           => 'Allow,Deny',
         allow           => 'from all'
       },
