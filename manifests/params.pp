@@ -27,7 +27,10 @@
 #
 # Copyright 2013 Nic Waller, unless otherwise noted.
 #
-class mailman::params {
+class mailman::params (  $ssl_use  = $mailman::params::ssl_use,
+  $ssl_cert              = $mailman::params::ssl_cert,
+  $ssl_key               = $mailman::params::ssl_key,
+  $ssl_ca                = $mailman::params::ssl_ca,) {
   $mm_package = 'mailman'
   $mm_service = 'mailman'
   case $::osfamily {
