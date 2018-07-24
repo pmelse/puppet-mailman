@@ -30,6 +30,11 @@
 class mailman::params {
   $mm_package = 'mailman'
   $mm_service = 'mailman'
+  # ssl params
+  $ssl_use = false
+  $ssl_cert = ''
+  $ssl_key = ''
+  $ssl_ca = ''
   case $::osfamily {
     'RedHat': {
       $mm_username   = 'mailman'
@@ -90,6 +95,7 @@ class mailman::params {
       $queue_dir     = '/var/spool/mailman'
       # Other useful files
       $pid_file      = "${pid_dir}/master-qrunner.pid"
+
     }
     default: {
       fail("Mailman module is not supported on ${::osfamily}.")
