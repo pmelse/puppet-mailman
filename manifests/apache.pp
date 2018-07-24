@@ -59,7 +59,8 @@ class mailman::apache {
   $cf1 = "ScriptAlias /mailman ${mailman_cgi_dir}/"
   $cf2 = "RedirectMatch ^/mailman[/]*$ http://${server_name}/mailman/listinfo"
   $cf3 = "RedirectMatch ^/?$ http://${server_name}/mailman/listinfo"
-  $cf_all = "${cf1}\n${cf2}\n${cf3}\n"
+  $cf4 = "ScriptAlias /images/mailman /usr/share/images/mailman/"
+  $cf_all = "${cf1}\n${cf2}\n${cf3}\n${cf4}\n"
 
   apache::vhost { $server_name:
     docroot         => $document_root,
