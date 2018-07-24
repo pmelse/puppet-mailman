@@ -27,14 +27,13 @@
 #
 # Copyright 2013 Nic Waller, unless otherwise noted.
 #
-class mailman::params {
+class mailman::params(  $ssl_use  = false,
+  $ssl_cert              = '/tmp/cert',
+  $ssl_key               = '/tmp/key',
+  $ssl_ca                = '/tmp/ssl_ca',)  {
   $mm_package = 'mailman'
   $mm_service = 'mailman'
   # ssl params
-  $ssl_use = false
-  $ssl_cert = '/tmp/cert'
-  $ssl_key = '/tmp/key'
-  $ssl_ca = '/tmp/ca'
   case $::osfamily {
     'RedHat': {
       $mm_username   = 'mailman'
