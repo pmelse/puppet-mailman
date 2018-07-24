@@ -72,6 +72,7 @@ class mailman::params {
       $exec_prefix   = $prefix
       $var_prefix    = '/var/lib/mailman'
       $cgi_dir      = '/usr/lib/cgi-bin/mailman' # unique to debian, tested on stretch
+      $icons_dir     = '/usr/share/images/mailman' #tested on debian 9 (stretch)
       $list_data_dir = "${var_prefix}/lists"
       $log_dir       = '/var/log/mailman'
       $lock_dir      = '/var/lock/mailman'
