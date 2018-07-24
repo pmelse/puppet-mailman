@@ -77,9 +77,8 @@
 #
 # ssl params
 #   $ssl_use = boolean, default is false. if set true, the remaining ssl paths must be set:
-      $ssl_cert
-      $ssl_key
-      $ssl_ca
+#  [*ssl_cert,ssl_key,ssl_ca]
+#   these are strings that point to the relevant X509 certs. see puppetlabs-apache forge module
 #
 # === Examples
 #
