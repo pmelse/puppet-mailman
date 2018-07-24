@@ -59,7 +59,10 @@ class mailman::apache {
   $httpd_service      = $::apache::params::apache_name
 
   include apache::mod::alias
-  notify { $mailman_cgi_dir: }
+  notify { $mailman_ssl: }
+    notify { $mailman_ssl_cert: }
+      notify { $mailman_ssl_key: }
+        notify { $mailman_ssl_ca: }
   $cf1 = "ScriptAlias /mailman ${mailman_cgi_dir}/"
   $cf2 = "RedirectMatch ^/mailman[/]*$ http://${server_name}/mailman/listinfo"
   $cf3 = "RedirectMatch ^/?$ http://${server_name}/mailman/listinfo"
