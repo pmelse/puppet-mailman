@@ -32,9 +32,9 @@ class mailman::params {
   $mm_service = 'mailman'
   # ssl params
   $ssl_use = false
-  $ssl_cert = ''
-  $ssl_key = ''
-  $ssl_ca = ''
+  $ssl_cert = '/tmp/'
+  $ssl_key = '/tmp/'
+  $ssl_ca = '/tmp/'
   case $::osfamily {
     'RedHat': {
       $mm_username   = 'mailman'
