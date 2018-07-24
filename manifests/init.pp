@@ -117,7 +117,7 @@ class mailman (
   $ssl_key               = $mailman::params::ssl_key,
   $ssl_ca                = $mailman::params::ssl_ca,
   $option_hash           = { 'DEFAULT_MAX_NUM_RECIPIENTS' => 20 },
-) inherits mailman::params {
+) {
   $langs = ['ar','ca','cs','da','de','en','es','et','eu','fi','fr','gl','he',
     'hr','hu','ia','it','ja','ko','lt','nl','no','pl','pt','pt_BR','ro',
     'ru','sk','sl','sr','sv','tr','uk','vi','zh_CN','zh_TW']
