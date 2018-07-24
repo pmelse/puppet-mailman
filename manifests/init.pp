@@ -158,7 +158,7 @@ class mailman (
       path        => $mailman::params::bin_dir,
       refreshonly => true,
       subscribe   => File['mm_cfg'],
-   # }
+    }
  # } else {
  # warning('Be careful using genaliases on Mailman < 2.1.15')
  # }
