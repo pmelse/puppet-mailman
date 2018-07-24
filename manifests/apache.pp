@@ -29,6 +29,10 @@ class mailman::apache {
   $document_root      = '/var/www/html/mailman'
   $mailman_cgi_dir    = $mailman::params::cgi_dir
   $mailman_icons_dir  = $mailman::params::icons_dir
+  $mailman_ssl        = $mailman::params::ssl_use
+  $mailman_ssl_cert   = $mailman::params::ssl_cert
+  $mailman_ssl_key    = $mailman::params::ssl_key
+  $mailman_ssl_ca     = $mailman::params::ssl_ca
   $custom_log_name    = 'apache_access_log'
   $error_log_name     = 'apache_error_log'
   $custom_log         = "${log_dir}/${custom_log_name}"
@@ -65,7 +69,10 @@ class mailman::apache {
     docroot         => $document_root,
     docroot_owner   => $http_username,
     docroot_group   => $http_groupname,
-    ssl             => false,
+    ssl             => $mailman_ssl,
+    ssl_cert        => $mailman_ssl_cert,
+    ssl_key         => $mailman_ssl_key,
+    ssl_ca          => $mailman_ssl_ca,
     access_log_file => $custom_log_name,
     error_log_file  => $error_log_name,
     logroot         => $log_dir,
