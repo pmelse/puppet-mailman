@@ -68,7 +68,7 @@ class mailman::apache (
   $cf_all = "${cf1}\n${cf2}\n${cf3}\n"
   if $ssl == true {
     $port = '443' 
-  apache::vhost { $server_name:
+  apache::vhost { "${server_name}-ssl":
     docroot         => $document_root,
     docroot_owner   => $http_username,
     docroot_group   => $http_groupname,
@@ -125,7 +125,7 @@ class mailman::apache (
   }
   else {
     $port = '80'
-      apache::vhost { $server_name:
+      apache::vhost {  "${server_name}-redir":
     docroot         => $document_root,
     docroot_owner   => $http_username,
     docroot_group   => $http_groupname,
