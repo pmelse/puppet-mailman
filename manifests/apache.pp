@@ -115,7 +115,7 @@ class mailman::apache (
       }
     ],
   }
-    apache::vhost { $server_name:
+    apache::vhost { "${server_name}-redir":
     docroot         => $document_root,
     docroot_owner   => $http_username,
     docroot_group   => $http_groupname,
@@ -125,7 +125,7 @@ class mailman::apache (
   }
   else {
     $port = '80'
-      apache::vhost {  "${server_name}-redir":
+      apache::vhost {  "${server_name}-80":
     docroot         => $document_root,
     docroot_owner   => $http_username,
     docroot_group   => $http_groupname,
