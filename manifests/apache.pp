@@ -40,6 +40,11 @@ class mailman::apache (
   $error_log          = "${log_dir}/${error_log_name}"
   $favicon            = "${document_root}/favicon.ico"
 
+  if $ssl = true {
+    $port = 443 }
+  else {
+    $port = 80
+  }
   # we need to work with apache 2.4
   #if versioncmp($::apache::version, '2.4.0') >= 0 {
   #  fail('Apache 2.4 is not supported by this Puppet module.')
@@ -69,6 +74,7 @@ class mailman::apache (
     docroot         => $document_root,
     docroot_owner   => $http_username,
     docroot_group   => $http_groupname,
+    port            => $port,
     ssl             => $ssl,
     ssl_cert        => $ssl_cert,
     ssl_key         => $ssl_key,
