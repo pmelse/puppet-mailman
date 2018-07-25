@@ -34,10 +34,6 @@ class mailman::apache (
   $document_root      = '/var/www/html/mailman'
   $mailman_cgi_dir    = $mailman::cgi_dir
   $mailman_icons_dir  = $mailman::params::icons_dir
-  $mailman_ssl        = $mailman::ssl_use
-  $mailman_ssl_cert   = $mailman::ssl_cert
-  $mailman_ssl_key    = $mailman::ssl_key
-  $mailman_ssl_ca     = $mailman::ssl_ca
   $custom_log_name    = 'apache_access_log'
   $error_log_name     = 'apache_error_log'
   $custom_log         = "${log_dir}/${custom_log_name}"
