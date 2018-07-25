@@ -19,7 +19,12 @@
 #
 # Copyright 2013 Nic Waller, unless otherwise noted.
 #
-class mailman::apache {
+class mailman::apache (
+  $ssl_use               = false,
+  $ssl_cert              = '/tmp/cert',
+  $ssl_key               = '/tmp/key',
+  $ssl_ca                = '/tmp/ca',
+){
   $prefix             = $mailman::params::prefix
   # have to keep http logs and mailman logs separate because of selinux
   # TODO: create symlinks from mm logdir to http logdir
