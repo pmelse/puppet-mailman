@@ -112,10 +112,6 @@ class mailman (
   $queue_dir             = $mailman::params::queue_dir,
   $archive_dir           = $mailman::params::archive_dir,
   $pid_file              = $mailman::params::pid_file,
-  $ssl_use               = $mailman::params::ssl_use,
-  $ssl_cert              = $mailman::params::ssl_cert,
-  $ssl_key               = $mailman::params::ssl_key,
-  $ssl_ca                = $mailman::params::ssl_ca,
   $option_hash           = { 'DEFAULT_MAX_NUM_RECIPIENTS' => 20 },
 ) inherits mailman::params {
   $langs = ['ar','ca','cs','da','de','en','es','et','eu','fi','fr','gl','he',
