@@ -45,6 +45,7 @@ class mailman::apache (
   else {
     $port = '80'
   }
+  notify {"Port is  ${port}":}
   # we need to work with apache 2.4
   #if versioncmp($::apache::version, '2.4.0') >= 0 {
   #  fail('Apache 2.4 is not supported by this Puppet module.')
