@@ -40,7 +40,7 @@ class mailman::apache (
   $error_log          = "${log_dir}/${error_log_name}"
   $favicon            = "${document_root}/favicon.ico"
 
-  if $ssl = true {
+  if $ssl == true {
     $port = 443 }
   else {
     $port = 80
