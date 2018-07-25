@@ -120,7 +120,7 @@ class mailman::apache (
     docroot_owner   => $http_username,
     docroot_group   => $http_groupname,
     port            => '80',
-    custom_fragment => "RedirectMatch ^.*$ https://${server_name}/"
+    custom_fragment => "RedirectMatch ^(.*)$ https://${server_name}/"
     }
   }
   else {
