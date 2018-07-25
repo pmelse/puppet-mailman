@@ -20,7 +20,7 @@
 # Copyright 2013 Nic Waller, unless otherwise noted.
 #
 class mailman::apache (
-  $ssl_use               = false,
+  $ssl               = false,
   $ssl_cert              = '/tmp/cert',
   $ssl_key               = '/tmp/key',
   $ssl_ca                = '/tmp/ca',
@@ -60,10 +60,6 @@ class mailman::apache (
   $httpd_service      = $::apache::params::apache_name
 
   include apache::mod::alias
-  notify { bool2str($mailman_ssl): }
-    notify { $mailman_ssl_cert: }
-      notify { $mailman_ssl_key: }
-        notify { $mailman_ssl_ca: }
   $cf1 = "ScriptAlias /mailman ${mailman_cgi_dir}/"
   $cf2 = "RedirectMatch ^/mailman[/]*$ http://${server_name}/mailman/listinfo"
   $cf3 = "RedirectMatch ^/?$ http://${server_name}/mailman/listinfo"
@@ -73,10 +69,10 @@ class mailman::apache (
     docroot         => $document_root,
     docroot_owner   => $http_username,
     docroot_group   => $http_groupname,
-    ssl             => $mailman_ssl,
-    ssl_cert        => $mailman_ssl_cert,
-    ssl_key         => $mailman_ssl_key,
-    ssl_ca          => $mailman_ssl_ca,
+    ssl             => $ssl,
+    ssl_cert        => $ssl_cert,
+    ssl_key         => $ssl_key,
+    ssl_ca          => $ssl_ca,
     access_log_file => $custom_log_name,
     error_log_file  => $error_log_name,
     logroot         => $log_dir,
