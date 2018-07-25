@@ -40,11 +40,7 @@ class mailman::apache (
   $error_log          = "${log_dir}/${error_log_name}"
   $favicon            = "${document_root}/favicon.ico"
 
-  if $ssl == true {
-    $port = '443' }
-  else {
-    $port = '80'
-  }
+
   notify {"Port is  ${port}":}
   # we need to work with apache 2.4
   #if versioncmp($::apache::version, '2.4.0') >= 0 {
@@ -70,7 +66,8 @@ class mailman::apache (
   $cf2 = "RedirectMatch ^/mailman[/]*$ https://${server_name}/mailman/listinfo"
   $cf3 = "RedirectMatch ^/?$ https://${server_name}/mailman/listinfo"
   $cf_all = "${cf1}\n${cf2}\n${cf3}\n"
-
+  if $ssl == true {
+    $port = '443' 
   apache::vhost { $server_name:
     docroot         => $document_root,
     docroot_owner   => $http_username,
@@ -118,6 +115,65 @@ class mailman::apache (
       }
     ],
   }
+    apache::vhost { $server_name:
+    docroot         => $document_root,
+    docroot_owner   => $http_username,
+    docroot_group   => $http_groupname,
+    port            => '80',
+    custom_fragment => "RedirectMatch ^.*$ https://${server_name}/"
+    }
+  }
+  else {
+    $port = '80'
+      apache::vhost { $server_name:
+    docroot         => $document_root,
+    docroot_owner   => $http_username,
+    docroot_group   => $http_groupname,
+    port            => $port,
+    ssl             => $ssl,
+    ssl_cert        => $ssl_cert,
+    ssl_key         => $ssl_key,
+    ssl_ca          => $ssl_ca,
+    access_log_file => $custom_log_name,
+    error_log_file  => $error_log_name,
+    logroot         => $log_dir,
+    ip_based        => true, # dedicate apache to mailman
+    custom_fragment => $cf_all,
+    aliases         => [ {
+      alias => '/pipermail',
+      path  => $public_archive_dir
+    }, {
+      alias => '/doc/mailman/images',
+      path  =>  $mailman_icons_dir
+    }, {
+      alias => '/images/mailman',
+      path  =>  $mailman_icons_dir
+    }],
+    directories     => [
+      {
+        path            => $mailman_cgi_dir,
+        allow_override  => ['None'],
+        options         => ['ExecCGI'],
+        order           => 'Allow,Deny',
+        allow           => 'from all'
+      },
+      {
+        path            => $mailman_icons_dir,
+        allow_override  => ['None'],
+        order           => 'Allow,Deny',
+        allow           => 'from all'
+      },
+      {
+        path            => $public_archive_dir,
+        allow_override  => ['None'],
+        options         => ['Indexes', 'MultiViews', 'FollowSymLinks'],
+        order           => 'Allow,Deny',
+        custom_fragment => 'AddDefaultCharset Off'
+      }
+    ],
+  }
+  }
+  
 
   # Spaceship Operator lets us defer setting group owner until we know it.
   File <| title == $mailman::aliasfile |> {
