@@ -67,8 +67,8 @@ class mailman::apache (
 
   include apache::mod::alias
   $cf1 = "ScriptAlias /mailman ${mailman_cgi_dir}/"
-  $cf2 = "RedirectMatch ^/mailman[/]*$ http://${server_name}/mailman/listinfo"
-  $cf3 = "RedirectMatch ^/?$ http://${server_name}/mailman/listinfo"
+  $cf2 = "RedirectMatch ^/mailman[/]*$ https://${server_name}/mailman/listinfo"
+  $cf3 = "RedirectMatch ^/?$ https://${server_name}/mailman/listinfo"
   $cf_all = "${cf1}\n${cf2}\n${cf3}\n"
 
   apache::vhost { $server_name:
