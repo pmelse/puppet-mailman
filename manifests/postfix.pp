@@ -37,7 +37,7 @@ class mailman::postfix (
     myhostname           => $mailman::smtp_hostname,
     mydomain             => $mailman::smtp_hostname,
     alias_maps           => "hash:${mailman::aliasfile}",
-    data_directory       => $data_directory
+    data_directory       => $data_directory,
     # no other hosts are trusted to relay email through this server
     mynetworks_style     => 'host',
 
