@@ -22,7 +22,9 @@
 #
 # Copyright 2013 Nic Waller, unless otherwise noted.
 #
-class mailman::postfix {
+class mailman::postfix (
+  $data_directory = '/usr/lib/postfix/sbin'
+){
 
   if $mailman::mta != 'Postfix' {
     fail('Must set MTA=Postfix if using Postfix helper class')
@@ -35,7 +37,7 @@ class mailman::postfix {
     myhostname           => $mailman::smtp_hostname,
     mydomain             => $mailman::smtp_hostname,
     alias_maps           => "hash:${mailman::aliasfile}",
-
+    data_directory       => $data_directory
     # no other hosts are trusted to relay email through this server
     mynetworks_style     => 'host',
 
