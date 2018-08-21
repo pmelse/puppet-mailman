@@ -40,6 +40,7 @@ class mailman::postfix (
     data_directory       => $data_directory,
     # no other hosts are trusted to relay email through this server
     mynetworks_style     => 'host',
+    extra_main_parameters => { shlib_directory => 'no'},
 
     # reply error 550 if list does not exist
     local_recipient_maps => "hash:${mailman::aliasfile}",
