@@ -63,9 +63,8 @@ class mailman::apache (
   $cf1 = "ScriptAlias /mailman ${mailman_cgi_dir}/"
   $cf2 = "RedirectMatch ^/mailman[/]*$ https://${server_name}/mailman/listinfo"
   $cf3 = "RedirectMatch ^/?$ https://${server_name}/mailman/listinfo"
-  $cf_all = "${cf1}\n${cf2}\n${cf3}\n"
+  $cf_all = "${cf0}\n${cf1}\n${cf2}\n${cf3}\n"
   $cf0 = "RedirectMatch ^/pipermail/(.*)$ https://lists2.feds.ca/pipermail/$1"
-  $cf_redir = "${cf0}\n${cf1}\n${cf2}\n${cf3}\n"
   if $ssl == true {
     $port = '443' 
   apache::vhost { "${server_name}-ssl":
@@ -138,7 +137,7 @@ class mailman::apache (
     error_log_file  => $error_log_name,
     logroot         => $log_dir,
     ip_based        => true, # dedicate apache to mailman
-    custom_fragment => $cf_redir,
+    custom_fragment => $cf_all,
     aliases         => [ {
       alias => '/pipermail',
       path  => $public_archive_dir
